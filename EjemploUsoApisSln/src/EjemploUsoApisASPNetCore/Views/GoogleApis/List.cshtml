@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IList<Google.Apis.Discovery.v1.Data.DirectoryList.ItemsData>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="container">
+        @foreach (var singleItem in Model)
+        {
+            <div class="row">
+                <h1 class="panel-heading">
+                    @Html.LabelFor(m=>singleItem.Name)
+                    @singleItem.Name
+                </h1>
+                <div class="col">
+                    @Html.LabelFor(m=>singleItem.Description)
+                </div>
+                <div class="col">
+                    @singleItem.Description
+                </div>
+                <div class="col">
+                    @Html.LabelFor(m=>singleItem.Title)
+                </div>
+                <div class="col">
+                    @singleItem.Title
+                </div>
+                <div class="col">
+                    @Html.LabelFor(m=>singleItem.DiscoveryLink)
+                </div>
+                <div class="col">
+                    @if (!string.IsNullOrWhiteSpace(singleItem.DiscoveryLink))
+                    {
+                        string discoveryLink = String.Format("https://www.googleapis.com/discovery/v1{0}", singleItem.DiscoveryLink.TrimStart('.'));
+                        <a href="@discoveryLink" , singleItem.DiscoveryLink.TrimStart('.'))" target="_blank" class="glyphicon-link">@discoveryLink</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <label class="has-error">No hay datos</label>
+}

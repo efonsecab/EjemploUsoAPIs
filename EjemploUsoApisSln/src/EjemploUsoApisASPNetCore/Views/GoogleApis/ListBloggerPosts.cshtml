@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Google.Apis.Blogger.v3.Data.Post>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="container">
+        @foreach (var singleItem in Model)
+        {
+            <div class="row">
+                <h1>
+                    <a href="@singleItem.Url" target="_blank">@singleItem.Title</a>
+                </h1>
+                <div class="col">
+                    @Html.Raw(singleItem.Content)
+                </div>
+            </div>
+
+        }
+    </div>
+}
+else
+{
+    <label class="has-error">No hay datos</label>
+}
